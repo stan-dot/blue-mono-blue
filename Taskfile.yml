@@ -17,7 +17,7 @@ tasks:
   type-check:
     desc: "Run pyright for type checking"
     cmds:
-      - pyright src tests {{.ARGS}}
+      - pyright packages {{.ARGS}}
 
   pre-commit:
     desc: "Run pre-commit hooks"
@@ -27,7 +27,8 @@ tasks:
   build-docs:
     desc: "Build Sphinx documentation"
     cmds:
-      - sphinx-build -E -T docs build/html {{.ARGS}}
+      - sphinx-build -E -T packages/dodal-main/docs build/html {{.ARGS}}
+      - sphinx-build -E -T packages/blueapi-main/docs build/html {{.ARGS}}
 
   watch-docs:
     desc: "Autobuild and watch Sphinx documentation"
@@ -49,3 +50,13 @@ tasks:
       - test -f docker-compose.yml
     cmds:
       - docker-compose up -d
+
+  lint:
+    desc: "Run Ruff linting"
+    cmds:
+      - uvx ruff check . --fix
+
+  cow:
+    desc: "Run cowsay"
+    cmds:
+      - uvx pycowsay "Taskfile is awesome!"
