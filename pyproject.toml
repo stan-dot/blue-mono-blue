@@ -1,0 +1,18 @@
+[project]
+name = "blue-mono-blue"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["blueapi", "dodal"]
+
+
+[tool.uv.sources]
+blueapi = { workspace = true }
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[build-system]
+requires = ["hatchlings"]
+build-backend = "hatchling.build"
