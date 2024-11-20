@@ -1,0 +1,51 @@
+version: "3"
+
+vars:
+  ARGS: ""
+
+tasks:
+  setup-coverage:
+    desc: "Setup coverage paths"
+    cmds:
+      - echo "source_paths = src **/site-packages/" > coverage_config.txt
+
+  run-tests:
+    desc: "Run pytest tests with coverage"
+    cmds:
+      - pytest -m 'not s03' {{.ARGS}}
+
+  type-check:
+    desc: "Run pyright for type checking"
+    cmds:
+      - pyright src tests {{.ARGS}}
+
+  pre-commit:
+    desc: "Run pre-commit hooks"
+    cmds:
+      - pre-commit run --all-files --show-diff-on-failure {{.ARGS}}
+
+  build-docs:
+    desc: "Build Sphinx documentation"
+    cmds:
+      - sphinx-build -E -T docs build/html {{.ARGS}}
+
+  watch-docs:
+    desc: "Autobuild and watch Sphinx documentation"
+    cmds:
+      - sphinx-autobuild docs build/html
+
+  all:
+    desc: "Run all tasks: tests, type-check, pre-commit, and build docs"
+    deps:
+      - run-tests
+      - type-check
+      - pre-commit
+      - build-docs
+
+  up:
+    desc: "Start Docker Compose services"
+    dir: "{{.USER_WORKING_DIR}}"
+    preconditions:
+      - test -f docker-compose.yml
+    cmds:
+      - docker-compose up -d
