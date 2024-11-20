@@ -9,10 +9,11 @@ tasks:
     cmds:
       - echo "source_paths = src **/site-packages/" > coverage_config.txt
 
-  run-tests:
+  test:
     desc: "Run pytest tests with coverage"
     cmds:
-      - pytest -m 'not s03' {{.ARGS}}
+      - pytest packages/dodal-main/tests -m 'not s03' {{.ARGS}}
+      - pytest packages/blueapi-main/tests -m 'not s03' {{.ARGS}}
 
   type-check:
     desc: "Run pyright for type checking"

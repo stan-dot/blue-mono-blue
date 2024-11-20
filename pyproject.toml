@@ -13,7 +13,7 @@ dodal = { workspace = true }
 horseshoecrab_code = { workspace = true }
 
 [tool.uv.workspace]
-members = ["packages/*", "hello-2", "hello-3"]
+members = ["packages/*", "hello-2", "hello-3", "beamlines"]
 
 [build-system]
 requires = ["hatchlings"]
