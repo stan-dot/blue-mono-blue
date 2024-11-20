@@ -9,9 +9,11 @@ dependencies = ["blueapi", "dodal"]
 
 [tool.uv.sources]
 blueapi = { workspace = true }
+dodal = { workspace = true }
+horseshoecrab_code = { workspace = true }
 
 [tool.uv.workspace]
-members = ["packages/*"]
+members = ["packages/*", "hello-2", "hello-3"]
 
 [build-system]
 requires = ["hatchlings"]

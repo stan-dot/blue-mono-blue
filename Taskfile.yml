@@ -60,3 +60,12 @@ tasks:
     desc: "Run cowsay"
     cmds:
       - uvx pycowsay "Taskfile is awesome!"
+
+  init-project:
+    desc: "Create a directory and initialize a new project using `uv init`"
+    params:
+      - name: project_name
+        desc: "Name of the project to initialize"
+    cmds:
+      - mkdir -p {{ .project_name }}
+      - cd {{ .project_name }} && uv init
